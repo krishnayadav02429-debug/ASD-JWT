@@ -3,10 +3,10 @@ const authRoutes = require('./routes/auth');
 
 const app = express();
 
-// Middleware to parse incoming JSON requests
+
 app.use(express.json());
 
-// Handle malformed JSON request bodies gracefully
+
 app.use((err, req, res, next) => {
   if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
     return res.status(400).json({
@@ -16,7 +16,7 @@ app.use((err, req, res, next) => {
   next();
 });
 
-// Root endpoint: API overview
+
 app.get('/', (req, res) => {
   res.status(200).json({
     message: 'User Authentication System API',
@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
   });
 });
 
-// Mount authentication routes
+
 app.use('/', authRoutes);
 
 module.exports = app;
